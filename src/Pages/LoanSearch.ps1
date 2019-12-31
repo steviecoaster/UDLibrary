@@ -40,4 +40,15 @@ $SearchLoan = New-UDPage -Name "Search Loans" -Content {
 
         }
     }
+
+    New-UDRow {
+        New-UDColumn -Size 6 {
+
+            New-UDGrid -Title "Results" -Endpoint {
+
+                $session:Loan | Out-UDGridData
+            } -AutoRefresh -ServerSideProcessing
+
+        }
+    }
 }
