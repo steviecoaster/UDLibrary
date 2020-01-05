@@ -21,9 +21,11 @@ $AddBook = New-UDPage -Name "Add Book" -Content {
                     Cover  = "$($result.items.volumeinfo.imageLinks.smallThumbnail)"
                 }
                 
-                Invoke-Sqlcmd2 -ServerInstance "Localhost\SQLEXPRESS" -Database "Library" -Query "INSERT INTO Books (Title,Author,ISBN,Cover) VALUES ('$($object.Title)','$($object.Author)','$($object.ISBN)','$($Object.Cover)')"
+                Invoke-Sqlcmd2 -ServerInstance "Localhost\SQLEXPRESS" -Database "Library" -Query "INSERT INTO Books (Title,Author,ISBN,Cover) VALUES ('$($object.Title -replace "'","''")','$($object.Author -replace "'","''")','$($object.ISBN)','$($Object.Cover)')"
                 
                 Show-UDToast -Duration 3000 -Title "SUCCESS" -Message "$($object.Title) successfully added to Database!"
+
+                New-UDInputAction -ClearInput -Toast ''
 
             } -SubmitText "Add"
         }
