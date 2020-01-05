@@ -34,14 +34,17 @@ $Search = New-UDPage -Name "Book Search" -Content {
             $session:data = Invoke-SQLCmd2 -ServerInstance "Localhost\SQLEXPRESS" -Database 'Library' -Query "SELECT * FROM Books WHERE Author LIKE '%$Author%'" -As PSObject
 
         }
+
+        Sync-UDElement -Id 'SearchGrid' -Broadcast
+
     } -SubmitText "Search"
         
         
 
         
-    New-UDGrid -Title "Book Information" -Endpoint {
+    New-UDGrid -Title "Book Information" -Id 'SearchGrid' -Endpoint {
         $session:data | Out-UDGridData
         
-    } -AutoRefresh -ServerSideProcessing
+    } -AutoRefresh -PageSize 10
 
 }
