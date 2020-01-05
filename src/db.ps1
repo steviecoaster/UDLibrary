@@ -1,0 +1,3 @@
+Invoke-Sqlcmd2 -ServerInstance "Localhost\SQLEXPRESS" -Query "CREATE DATABASE Library;"
+Invoke-Sqlcmd2 -ServerInstance "Localhost\SQLEXPRESS" -Database "Library" -Query "CREATE TABLE Books(Title varchar(50),Author varchar(50),ISBN varchar(50),Cover varchar(MAX),IsLoaned bit,Description varchar(MAX),Published varchar(100),PageCount varchar(50))"
+Invoke-Sqlcmd2 -ServerInstance "Localhost\SQLEXPRESS" -Database "Library" -Query "CREATE TABLE Loans (Title varchar(50),Name varchar(50),Due date)"
